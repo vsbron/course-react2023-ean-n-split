@@ -98,7 +98,12 @@ export default function App() {
 
       {/* Right section with the calculator that appears only when one of the friends is seelcted. Passing this friend to the component */}
       {selectedFriend && (
-        <FormSplitBill friend={selectedFriend} onSplitBill={handleSplitBill} />
+        <FormSplitBill
+          friend={selectedFriend}
+          onSplitBill={handleSplitBill}
+          // Adding key to reset the fields when changing friend
+          key={selectedFriend.id}
+        />
       )}
     </div>
   );
@@ -228,7 +233,7 @@ function FormSplitBill({ friend, onSplitBill }) {
 
   // Rendering the input fields with controlled elements
   return (
-    <form className="form-split-bill" onSubmit={handleSubmit}>
+    <form className="form-split-bill" onSubmit={handleSubmit} key={friend}>
       <h2>Split a bill with {friend.name}</h2>
 
       <label>💰Bill value</label>
